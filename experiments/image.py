@@ -15,6 +15,10 @@
 
 """Jaxline experiment for C3 image experiments. Assume single-device."""
 
+import utils.clients
+import utils.http_session
+import utils.transport
+import utils.session
 import collections
 from collections.abc import Mapping
 import functools
