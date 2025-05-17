@@ -13,28 +13,27 @@
 # limitations under the License.
 # ==============================================================================
 
-"""Config for KODAK experiment with KAN instead of MLP."""
+"""Config for UVG experiment with KAN instead of MLP."""
 
 from ml_collections import config_dict
 
-from configs import kodak
+from configs import uvg
 
 def get_config() -> config_dict.ConfigDict:
-  """Return config object for KAN-based training."""
+  """Return config object for KAN-based training on UVG dataset."""
   
-  # Get original Kodak configuration
-  config = kodak.get_config()
+  # Get original UVG configuration
+  config = uvg.get_config()
   exp = config.experiment_kwargs.config
   
   # Add KAN-specific parameters
-  exp.model.use_kan_synthesis = True
+  exp.model.use_kan = True
   exp.model.kan = config_dict.ConfigDict()
-  exp.model.kan.num_knots = 10
-  exp.model.kan.spline_range = 3.0
+  exp.model.kan.num_knots = 15  # Number of spline knots
+  exp.model.kan.spline_range = 3.0  # Range for spline approximation
   
-  # Fix dataset path
-  exp.dataset.root_dir = '/home/shittyprogrammers/Desktop/Datasets/Kodak'  # Update to a valid path
-  exp.dataset.num_examples = 1 
+  # Adjust training parameters if needed for KAN
+  # exp.training.learning_rate = 5e-4  # Optional adjustment
   
   # Remove the lock to allow modifications
   config.unlock()
